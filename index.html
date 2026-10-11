@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="入力内容からGitHub用README.mdを作成する開発補助ツール">
+  <title>README作成ツール</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app">
+  <header class="hero">
+    <div><p class="badge">README GENERATOR</p><h1>README作成ツール</h1><p>プロジェクト情報を入力して、GitHub向けのREADME.mdをブラウザー内で作成します。</p></div>
+    <a class="home" href="https://kentaro0810.github.io/secret-links/">ツール集に戻る</a>
+  </header>
+
+  <section class="workspace">
+    <section class="card form-card">
+      <div class="heading"><div><p class="step">STEP 1</p><h2>プロジェクト情報</h2></div><button id="sampleButton" class="secondary" type="button">サンプル入力</button></div>
+
+      <div class="field-grid">
+        <label><span>プロジェクト名 <b>必須</b></span><input id="projectName" type="text" maxlength="80" placeholder="例：README作成ツール"></label>
+        <label><span>公開URL</span><input id="projectUrl" type="url" placeholder="https://example.github.io/project/"></label>
+      </div>
+      <label><span>概要 <b>必須</b></span><textarea id="description" rows="3" maxlength="300" placeholder="このプロジェクトでできることを簡潔に入力"></textarea></label>
+
+      <fieldset><legend>含める章</legend><div class="checks">
+        <label><input type="checkbox" data-section="features" checked> 主な機能</label>
+        <label><input type="checkbox" data-section="usage" checked> 使い方</label>
+        <label><input type="checkbox" data-section="install" checked> 導入方法</label>
+        <label><input type="checkbox" data-section="tech" checked> 使用技術</label>
+        <label><input type="checkbox" data-section="notes" checked> 注意事項</label>
+        <label><input type="checkbox" data-section="license"> ライセンス</label>
+      </div></fieldset>
+
+      <label><span>主な機能（1行に1つ）</span><textarea id="features" rows="5" placeholder="リアルタイムプレビュー&#10;Markdownをコピー&#10;README.mdをダウンロード"></textarea></label>
+      <label><span>使い方（1行に1手順）</span><textarea id="usage" rows="5" placeholder="必要事項を入力します&#10;プレビューを確認します&#10;README.mdを保存します"></textarea></label>
+      <label><span>導入方法</span><textarea id="install" rows="4" placeholder="例：リポジトリをクローンし、index.htmlをブラウザーで開きます。"></textarea></label>
+      <label><span>使用技術（1行に1つ）</span><textarea id="tech" rows="4" placeholder="HTML&#10;CSS&#10;JavaScript"></textarea></label>
+      <label><span>注意事項（1行に1つ）</span><textarea id="notes" rows="4" placeholder="入力内容は外部へ送信されません&#10;保存内容はブラウザーに依存します"></textarea></label>
+
+      <div class="field-grid">
+        <label><span>ライセンス</span><select id="license"><option value="MIT">MIT License</option><option value="Apache-2.0">Apache License 2.0</option><option value="GPL-3.0">GNU GPL v3.0</option><option value="none">ライセンス未設定</option></select></label>
+        <label><span>作者・管理者</span><input id="author" type="text" maxlength="80" placeholder="任意"></label>
+      </div>
+
+      <p id="message" class="message" aria-live="polite"></p>
+      <div class="buttons"><button id="saveDraftButton" class="secondary" type="button">下書きを保存</button><button id="clearButton" class="danger" type="button">入力を消去</button></div>
+    </section>
+
+    <section class="card preview-card">
+      <div class="heading"><div><p class="step">STEP 2</p><h2>プレビュー</h2></div><span id="charCount" class="pill">0文字</span></div>
+      <div id="preview" class="preview"></div>
+      <div class="action-grid"><button id="copyButton" class="primary" type="button">Markdownをコピー</button><button id="downloadButton" class="primary" type="button">README.mdを保存</button></div>
+      <p id="actionMessage" class="success" aria-live="polite"></p>
+      <details><summary>Markdownソースを表示</summary><textarea id="markdownSource" rows="16" readonly></textarea></details>
+    </section>
+  </section>
+
+  <section class="card safety"><h2>保存と安全について</h2><p>入力内容と下書きは、この端末・このブラウザー内のlocalStorageにのみ保存されます。秘密情報、APIキー、アクセストークン、実際のパスワードは入力しないでください。</p></section>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
